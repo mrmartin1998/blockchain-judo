@@ -1,33 +1,71 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Colors */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary-color: #1e3a8a; /* Blue-800 */
+  --secondary-color: #3b82f6; /* Blue-500 */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --primary-color: #3b82f6; /* Blue-500 */
+    --secondary-color: #60a5fa; /* Blue-400 */
   }
 }
 
+/* General body styles */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-900;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .form-container {
+    @apply p-6 max-w-lg mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800;
   }
+
+  .button-primary {
+    @apply w-full p-2 bg-blue-800 text-white rounded hover:bg-blue-700 dark:bg-blue-600;
+  }
+
+  .input-field {
+    @apply w-full p-2 mb-4 border border-gray-300 rounded dark:bg-gray-700;
+  }
+
+  .text-primary {
+    @apply text-blue-800 dark:text-blue-500;
+  }
+
+  .text-secondary {
+    @apply text-blue-500 dark:text-blue-400;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold text-primary dark:text-secondary;
+}
+
+p, ul {
+  @apply mb-4 text-gray-600 dark:text-gray-400;
+}
+
+nav {
+  @apply bg-blue-800 dark:bg-blue-500 text-white py-4 px-6;
+}
+
+nav ul {
+  @apply flex space-x-4;
+}
+
+nav a {
+  @apply underline hover:text-secondary dark:hover:text-primary;
+}
+
+footer {
+  @apply text-center py-4 text-sm text-gray-500 dark:text-gray-400;
 }
