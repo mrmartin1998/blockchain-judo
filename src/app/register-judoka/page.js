@@ -9,7 +9,7 @@ export default function RegisterJudokaPage() {
     name: "",
     walletAddress: "",
     dob: "",
-    gender: "0",
+    gender: "0", // "0" for Male, "1" for Female as per your Solidity enum
     weight: "",
     club: "",
   });
@@ -19,23 +19,29 @@ export default function RegisterJudokaPage() {
   };
 
   const handleRegisterJudoka = async () => {
-    // Assuming wallet address is pre-selected in MetaMask/Ganache account
     const accounts = await web3.eth.getAccounts();
     const selectedAccount = accounts[0];
 
     try {
-      // Date conversion to your Solidity Date struct
       const [year, month, day] = formData.dob.split("-");
-      const birthDate = { day, month, year };
+      const birthDate = [parseInt(day, 10), parseInt(month, 10), parseInt(year, 10)]; // Make sure to provide an array
+      
+      // Validate the parsed date
+      if (isNaN(birthDate[0]) || isNaN(birthDate[1]) || isNaN(birthDate[2])) {
+        alert("Please provide a valid date of birth in the format YYYY-MM-DD.");
+        return;
+      }
 
-      // Call the registerJudoka function from the JudoSystem contract
+      const weight = parseInt(formData.weight, 10);
+      const gender = parseInt(formData.gender, 10);
+
       await judoSystem.methods
         .registerJudoka(
           formData.name,
           formData.walletAddress,
           birthDate,
-          formData.gender,
-          formData.weight,
+          gender,
+          weight,
           formData.club
         )
         .send({ from: selectedAccount });
@@ -59,7 +65,50 @@ export default function RegisterJudokaPage() {
           onChange={handleInputChange}
         />
 
-        {/* Other form fields */}
+        <label>Wallet Address:</label>
+        <input
+          name="walletAddress"
+          className="input-field"
+          value={formData.walletAddress}
+          onChange={handleInputChange}
+        />
+
+        <label>Date of Birth (YYYY-MM-DD):</label>
+        <input
+          name="dob"
+          className="input-field"
+          value={formData.dob}
+          onChange={handleInputChange}
+        />
+
+        <label>Gender:</label>
+        <select
+          name="gender"
+          className="input-field"
+          value={formData.gender}
+          onChange={handleInputChange}
+        >
+          <option value="0">Male</option>
+          <option value="1">Female</option>
+        </select>
+
+        <label>Weight (kg):</label>
+        <input
+          name="weight"
+          type="number"
+          className="input-field"
+          value={formData.weight}
+          onChange={handleInputChange}
+        />
+
+        <label>Club:</label>
+        <input
+          name="club"
+          className="input-field"
+          value={formData.club}
+          onChange={handleInputChange}
+        />
+
         <button
           type="button"
           className="button-primary"
