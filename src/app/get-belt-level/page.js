@@ -2,18 +2,25 @@
 "use client";
 import { useState } from "react";
 import '../globals.css';
+import { judoSystem, web3 } from "../utils/web3";
 
 export default function GetBeltLevelPage() {
   const [walletAddress, setWalletAddress] = useState("");
   const [beltLevel, setBeltLevel] = useState("");
 
-  // Fetch belt level
   const fetchBeltLevel = async () => {
-    console.log(`Fetching belt level for address ${walletAddress}`);
-    // Replace with Web3 logic to fetch belt level
-    // Example: setBeltLevel(await getBeltLevel(walletAddress));
-    alert(`Fetching belt level for address ${walletAddress}`);
+    try {
+      const accounts = await web3.eth.getAccounts();
+      const selectedAccount = accounts[0];
+  
+      const beltLevel = await judoSystem.methods.getBeltLevel(judokaId).call({ from: selectedAccount });
+      setBeltLevel(beltLevel);
+    } catch (error) {
+      console.error("Error fetching belt level:", error);
+      alert("Error fetching belt level");
+    }
   };
+  
 
   return (
     <div className="form-container">

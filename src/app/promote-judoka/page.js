@@ -2,16 +2,28 @@
 "use client";
 import { useState } from "react";
 import '../globals.css';
+import { judoSystem, web3 } from "../utils/web3";
 
 export default function PromoteJudokaPage() {
   const [judokaId, setJudokaId] = useState("");
   const [newBeltLevel, setNewBeltLevel] = useState("0");
 
   const handlePromoteJudoka = async () => {
-    console.log(`Promoting judoka with ID ${judokaId} to level ${newBeltLevel}`);
-    // Replace with Web3 promotion logic
-    alert(`Promoting judoka with ID ${judokaId} to level ${newBeltLevel}`);
+    const accounts = await web3.eth.getAccounts();
+    const selectedAccount = accounts[0];
+  
+    try {
+      await judoSystem.methods
+        .promoteJudoka(judokaId, newBeltLevel)
+        .send({ from: selectedAccount });
+  
+      alert(`Judoka with ID ${judokaId} successfully promoted to level ${newBeltLevel}`);
+    } catch (error) {
+      console.error("Promotion failed:", error);
+      alert("Promotion failed");
+    }
   };
+  
 
   return (
     <div className="form-container">

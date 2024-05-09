@@ -2,18 +2,22 @@
 "use client";
 import { useState } from "react";
 import '../globals.css';
+import { judoSystem, web3 } from "../utils/web3";
 
 export default function JudokaProfilePage() {
   const [judokaId, setJudokaId] = useState("");
   const [judokaProfile, setJudokaProfile] = useState(null);
 
-  // Fetch profile data
   const fetchJudokaProfile = async () => {
-    console.log(`Fetching profile for judoka with ID ${judokaId}`);
-    // Replace with Web3 logic to fetch profile data
-    // Example: setJudokaProfile(await getProfile(judokaId));
-    alert(`Fetching profile for judoka with ID ${judokaId}`);
+    try {
+      const profile = await judoSystem.methods.getJudokaInfo(judokaId).call();
+      setJudokaProfile(profile);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+      alert("Error fetching profile");
+    }
   };
+  
 
   return (
     <div className="form-container">

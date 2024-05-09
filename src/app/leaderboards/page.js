@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import '../globals.css';
+import { judoSystem, web3 } from "../utils/web3";
 
 export default function LeaderboardsPage() {
   const [leaderboard, setLeaderboard] = useState([]);

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import '../globals.css';
+import { judoSystem, web3 } from "../utils/web3";
 
 export default function CompetitionsPage() {
   const [competitionName, setCompetitionName] = useState("");
@@ -11,11 +12,24 @@ export default function CompetitionsPage() {
   const [thirdPlace, setThirdPlace] = useState("");
   const [fourthPlace, setFourthPlace] = useState("");
 
-  // Create competition function
   const createCompetition = async () => {
-    console.log(`Creating competition named ${competitionName}`);
-    alert(`Creating competition named ${competitionName}`);
+    const accounts = await web3.eth.getAccounts();
+    const selectedAccount = accounts[0];
+  
+    const [year, month, day] = competitionDate.split("-");
+  
+    try {
+      await judoSystem.methods
+        .createCompetition(competitionName, parseInt(day), parseInt(month), parseInt(year))
+        .send({ from: selectedAccount });
+  
+      alert(`Competition ${competitionName} created successfully`);
+    } catch (error) {
+      console.error("Error creating competition:", error);
+      alert("Error creating competition");
+    }
   };
+  
 
   // Record competition result function
   const recordCompetitionResult = async () => {
