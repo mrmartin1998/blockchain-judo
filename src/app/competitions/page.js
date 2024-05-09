@@ -1,4 +1,3 @@
-// src/app/competitions/page.js
 "use client";
 import { useState } from "react";
 import '../globals.css';
@@ -15,15 +14,12 @@ export default function CompetitionsPage() {
   // Create competition function
   const createCompetition = async () => {
     console.log(`Creating competition named ${competitionName}`);
-    // Replace with Web3 logic to create competition
-    // Example: await createCompetition(name, date);
     alert(`Creating competition named ${competitionName}`);
   };
 
   // Record competition result function
   const recordCompetitionResult = async () => {
     console.log(`Recording results for competition ID ${resultCompetitionId}`);
-    // Replace with Web3 logic to record competition results
     alert(`Recording results for competition ID ${resultCompetitionId}`);
   };
 
@@ -32,71 +28,90 @@ export default function CompetitionsPage() {
       <h1 className="text-primary">Competitions</h1>
 
       {/* Create competition form */}
-      <div>
-        <h3>Create Competition</h3>
-        <label>Competition Name:</label>
-        <input
-          type="text"
-          value={competitionName}
-          onChange={(e) => setCompetitionName(e.target.value)}
-          className="input-field"
-        />
-
-        <label>Competition Date (YYYYMMDD):</label>
-        <input
-          type="text"
-          value={competitionDate}
-          onChange={(e) => setCompetitionDate(e.target.value)}
-          className="input-field"
-        />
-
-        <button type="button" className="button-primary" onClick={createCompetition}>Create</button>
+      <div className="mb-8">
+        <h3 className="font-semibold mb-4">Create Competition</h3>
+        <div className="mb-4">
+          <label className="block mb-1">Competition Name:</label>
+          <input
+            type="text"
+            value={competitionName}
+            onChange={(e) => setCompetitionName(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">Competition Date (YYYYMMDD):</label>
+          <input
+            type="text"
+            value={competitionDate}
+            onChange={(e) => setCompetitionDate(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <button
+          type="button"
+          className="button-primary"
+          onClick={createCompetition}
+        >
+          Create
+        </button>
       </div>
 
       {/* Record competition results form */}
       <div>
-        <h3>Record Competition Result</h3>
-        <label>Competition ID:</label>
-        <input
-          type="number"
-          value={resultCompetitionId}
-          onChange={(e) => setResultCompetitionId(e.target.value)}
-          className="input-field"
-        />
-
-        <label>First Place Wallet Address:</label>
-        <input
-          type="text"
-          value={firstPlace}
-          onChange={(e) => setFirstPlace(e.target.value)}
-          className="input-field"
-        />
-
-        <label>Second Place Wallet Address:</label>
-        <input
-          type="text"
-          value={secondPlace}
-          onChange={(e) => setSecondPlace(e.target.value)}
-          className="input-field"
-        />
-
-        <label>Third Place Wallet Address:</label>
-        <input
-          type="text"
-          value={thirdPlace}
-          onChange={(e) => setThirdPlace(e.target.value)}
-          className="input-field"
-        />
-
-        <label>Fourth Place Wallet Address:</label>
-        <input
-          type="text"
-          value={fourthPlace}
-          onChange={(e) => setFourthPlace(e.target.value)}
-          className="input-field"
-        />
-
-        <button type="button" className="button-primary" onClick={recordCompetitionResult}>Record Results</button>
+        <h3 className="font-semibold mb-4">Record Competition Result</h3>
+        <div className="mb-4">
+          <label className="block mb-1">Competition ID:</label>
+          <input
+            type="number"
+            value={resultCompetitionId}
+            onChange={(e) => setResultCompetitionId(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">First Place Wallet Address:</label>
+          <input
+            type="text"
+            value={firstPlace}
+            onChange={(e) => setFirstPlace(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">Second Place Wallet Address:</label>
+          <input
+            type="text"
+            value={secondPlace}
+            onChange={(e) => setSecondPlace(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">Third Place Wallet Address:</label>
+          <input
+            type="text"
+            value={thirdPlace}
+            onChange={(e) => setThirdPlace(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1">Fourth Place Wallet Address:</label>
+          <input
+            type="text"
+            value={fourthPlace}
+            onChange={(e) => setFourthPlace(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <button
+          type="button"
+          className="button-primary"
+          onClick={recordCompetitionResult}
+        >
+          Record Results
+        </button>
       </div>
     </div>
   );
