@@ -1,15 +1,15 @@
 // src/app/register-judoka/page.js
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../globals.css';
-import { judoSystem, web3 } from "../utils/web3";
+import { web3, judoSystem } from "../utils/web3";
 
 export default function RegisterJudokaPage() {
   const [formData, setFormData] = useState({
     name: "",
     walletAddress: "",
     dob: "",
-    gender: "0", // "0" for Male, "1" for Female as per your Solidity enum
+    gender: "0",
     weight: "",
     club: "",
   });
@@ -19,14 +19,18 @@ export default function RegisterJudokaPage() {
   };
 
   const handleRegisterJudoka = async () => {
+    if (!web3 || !judoSystem) {
+      alert('Web3 or the contract is not yet initialized.');
+      return;
+    }
+
     const accounts = await web3.eth.getAccounts();
     const selectedAccount = accounts[0];
 
     try {
       const [year, month, day] = formData.dob.split("-");
-      const birthDate = [parseInt(day, 10), parseInt(month, 10), parseInt(year, 10)]; // Make sure to provide an array
-      
-      // Validate the parsed date
+      const birthDate = [parseInt(day, 10), parseInt(month, 10), parseInt(year, 10)];
+
       if (isNaN(birthDate[0]) || isNaN(birthDate[1]) || isNaN(birthDate[2])) {
         alert("Please provide a valid date of birth in the format YYYY-MM-DD.");
         return;

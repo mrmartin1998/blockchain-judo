@@ -10,10 +10,9 @@ let judoSystem;
 // Contract address and ABI
 const contractAddress = "0x1c38fE5122baaBa18D8420C6dFc6bEbC5EDB2062";
 
-// Function to initialize Web3
 export function initializeWeb3() {
   if (typeof window !== 'undefined') {
-    // Only proceed if we're in a client-side environment
+    // Proceed only if we're in a client-side environment
     if (window.ethereum) {
       window.ethereum.request({ method: 'eth_requestAccounts' })
         .then((accounts) => {
@@ -53,6 +52,9 @@ export function initializeWeb3() {
     }
   }
 }
+
+// Initialize Web3 immediately
+initializeWeb3();
 
 // Export Web3 and the contract instance
 export { web3, judoSystem };
