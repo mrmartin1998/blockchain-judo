@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 import '../globals.css';
-import { judoSystem } from "../utils/web3";
+import { judoSystem, web3 } from "../utils/web3";
 
 // Map numeric belt levels and genders to their corresponding names
 const beltLevels = ["White", "Yellow", "Orange", "Green", "Blue", "Brown", "Black"];
