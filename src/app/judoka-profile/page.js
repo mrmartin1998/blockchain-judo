@@ -4,8 +4,9 @@ import { useState } from "react";
 import '../globals.css';
 import { judoSystem } from "../utils/web3";
 
-// Map numeric belt levels to their corresponding names
+// Map numeric belt levels and genders to their corresponding names
 const beltLevels = ["White", "Yellow", "Orange", "Green", "Blue", "Brown", "Black"];
+const genders = ["Male", "Female"];
 
 export default function JudokaProfilePage() {
   const [judokaId, setJudokaId] = useState("");
@@ -13,21 +14,24 @@ export default function JudokaProfilePage() {
 
   const fetchJudokaProfile = async () => {
     if (!judokaId) {
-      alert("Please provide a valid Judoka ID.");
-      return;
+        alert("Please provide a valid Judoka ID.");
+        return;
     }
 
     try {
-      const profile = await judoSystem.methods.getJudokaInfo(judokaId).call();
-      setJudokaProfile(profile);
+        const profile = await judoSystem.methods.getJudokaInfo(judokaId).call();
+        console.log(profile); // Log the entire profile object
+        setJudokaProfile(profile);
     } catch (error) {
-      console.error("Error fetching profile:", error);
-      alert("Error fetching profile. Make sure the ID is correct.");
+        console.error("Error fetching profile:", error);
+        alert("Error fetching profile. Make sure the ID is correct.");
     }
-  };
+};
 
-  // Function to get the belt level name from the numeric value
+
+  // Functions to get belt and gender names
   const getBeltLevelName = (beltLevel) => beltLevels[beltLevel] || "Unknown";
+  const getGenderName = (gender) => genders[gender] || "Unknown";
 
   return (
     <div className="form-container">
@@ -46,16 +50,16 @@ export default function JudokaProfilePage() {
       <div>
         {judokaProfile ? (
           <div>
-            <p><strong>ID:</strong> {judokaProfile.basic.id}</p>
+            <p><strong>ID:</strong> {Number(judokaProfile.basic.id)}</p>
             <p><strong>Name:</strong> {judokaProfile.basic.name}</p>
             <p><strong>Belt Level:</strong> {getBeltLevelName(judokaProfile.basic.beltLevel)}</p>
             <p><strong>Date of Birth:</strong> {`${judokaProfile.basic.birthDate.day}-${judokaProfile.basic.birthDate.month}-${judokaProfile.basic.birthDate.year}`}</p>
-            <p><strong>Gender:</strong> {judokaProfile.basic.gender}</p>
+            <p><strong>Gender:</strong> {getGenderName(judokaProfile.basic.gender)}</p>
             <p><strong>Email:</strong> {judokaProfile.contact.email || 'N/A'}</p>
             <p><strong>Phone Number:</strong> {judokaProfile.contact.phoneNumber || 'N/A'}</p>
             <p><strong>Club:</strong> {judokaProfile.physical.club}</p>
             <p><strong>Age:</strong> {judokaProfile.physical.age}</p>
-            <p><strong>Weight:</strong> {judokaProfile.physical.weight} kg</p>
+            <p><strong>Weight:</strong> {Number(judokaProfile.physical.weight)} kg</p>
             <p><strong>Age Category:</strong> {judokaProfile.physical.ageCategory}</p>
             <p><strong>Weight Category:</strong> {judokaProfile.physical.weightCategory}</p>
           </div>
