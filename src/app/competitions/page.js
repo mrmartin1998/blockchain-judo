@@ -28,8 +28,8 @@ export default function CompetitionsPage() {
   };
 
   return (
-    <div>
-      <h2>Competitions</h2>
+    <div className="form-container">
+      <h1 className="text-primary">Competitions</h1>
 
       {/* Create competition form */}
       <div>
@@ -39,6 +39,7 @@ export default function CompetitionsPage() {
           type="text"
           value={competitionName}
           onChange={(e) => setCompetitionName(e.target.value)}
+          className="input-field"
         />
 
         <label>Competition Date (YYYYMMDD):</label>
@@ -46,9 +47,10 @@ export default function CompetitionsPage() {
           type="text"
           value={competitionDate}
           onChange={(e) => setCompetitionDate(e.target.value)}
+          className="input-field"
         />
 
-        <button type="button" onClick={createCompetition}>Create</button>
+        <button type="button" className="button-primary" onClick={createCompetition}>Create</button>
       </div>
 
       {/* Record competition results form */}
@@ -59,6 +61,7 @@ export default function CompetitionsPage() {
           type="number"
           value={resultCompetitionId}
           onChange={(e) => setResultCompetitionId(e.target.value)}
+          className="input-field"
         />
 
         <label>First Place Wallet Address:</label>
@@ -66,6 +69,7 @@ export default function CompetitionsPage() {
           type="text"
           value={firstPlace}
           onChange={(e) => setFirstPlace(e.target.value)}
+          className="input-field"
         />
 
         <label>Second Place Wallet Address:</label>
@@ -73,6 +77,7 @@ export default function CompetitionsPage() {
           type="text"
           value={secondPlace}
           onChange={(e) => setSecondPlace(e.target.value)}
+          className="input-field"
         />
 
         <label>Third Place Wallet Address:</label>
@@ -80,6 +85,7 @@ export default function CompetitionsPage() {
           type="text"
           value={thirdPlace}
           onChange={(e) => setThirdPlace(e.target.value)}
+          className="input-field"
         />
 
         <label>Fourth Place Wallet Address:</label>
@@ -87,9 +93,10 @@ export default function CompetitionsPage() {
           type="text"
           value={fourthPlace}
           onChange={(e) => setFourthPlace(e.target.value)}
+          className="input-field"
         />
 
-        <button type="button" onClick={recordCompetitionResult}>Record Results</button>
+        <button type="button" className="button-primary" onClick={recordCompetitionResult}>Record Results</button>
       </div>
     </div>
   );

@@ -18,8 +18,8 @@ export default function LeaderboardsPage() {
   }, []);
 
   return (
-    <div>
-      <h2>Judoka Leaderboards</h2>
+    <div className="form-container">
+      <h1 className="text-primary">Judoka Leaderboards</h1>
       <div>
         {leaderboard.length > 0 ? (
           leaderboard.map((judoka) => (
