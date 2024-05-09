@@ -16,15 +16,16 @@ export default function GetBeltLevelPage() {
   };
 
   return (
-    <div>
-      <h2>Get Belt Level</h2>
+    <div className="form-container">
+      <h1 class="text-primary">Get Belt Level</h1>
       <label>Judoka's Wallet Address:</label>
       <input
         type="text"
         value={walletAddress}
         onChange={(e) => setWalletAddress(e.target.value)}
+        className="input-field"
       />
-      <button type="button" onClick={fetchBeltLevel}>Get Belt Level</button>
+      <button type="button" className="button-primary" onClick={fetchBeltLevel}>Get Belt Level</button>
 
       <div>
         {beltLevel ? <p>Belt Level: {beltLevel}</p> : <p>No belt level data available.</p>}

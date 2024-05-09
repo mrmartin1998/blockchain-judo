@@ -16,13 +16,14 @@ export default function JudokaProfilePage() {
   };
 
   return (
-    <div>
-      <h2>Judoka Profile</h2>
+    <div className="form-container">
+      <h1 className="tesxt-primary">Judoka Profile</h1>
       <label>Enter Judoka ID:</label>
       <input
         type="number"
         value={judokaId}
         onChange={(e) => setJudokaId(e.target.value)}
+        className="input-field"
       />
       <button type="button" onClick={fetchJudokaProfile}>Get Profile</button>
 
