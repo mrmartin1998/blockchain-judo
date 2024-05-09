@@ -8,7 +8,7 @@ let web3;
 let judoSystem;
 
 // Contract address and ABI
-const contractAddress = "0x1c38fE5122baaBa18D8420C6dFc6bEbC5EDB2062";
+const contractAddress = "0xA5B9E2534a261F344890046CAED17A53C8F26690";
 
 export function initializeWeb3() {
   if (typeof window !== 'undefined') {

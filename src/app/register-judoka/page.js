@@ -1,15 +1,15 @@
 // src/app/register-judoka/page.js
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import '../globals.css';
-import { web3, judoSystem } from "../utils/web3";
+import { judoSystem, web3 } from "../utils/web3";
 
 export default function RegisterJudokaPage() {
   const [formData, setFormData] = useState({
     name: "",
     walletAddress: "",
     dob: "",
-    gender: "0",
+    gender: "0", // "0" for Male, "1" for Female as per your Solidity enum
     weight: "",
     club: "",
   });
@@ -28,14 +28,15 @@ export default function RegisterJudokaPage() {
     const selectedAccount = accounts[0];
 
     try {
-      const [year, month, day] = formData.dob.split("-");
-      const birthDate = [parseInt(day, 10), parseInt(month, 10), parseInt(year, 10)];
+      // Split the date of birth and ensure it's in the correct format
+      const [year, month, day] = formData.dob.split("-").map(Number);
 
-      if (isNaN(birthDate[0]) || isNaN(birthDate[1]) || isNaN(birthDate[2])) {
+      if (isNaN(day) || isNaN(month) || isNaN(year) || day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
         alert("Please provide a valid date of birth in the format YYYY-MM-DD.");
         return;
       }
 
+      const birthDate = [day, month, year]; // Ensure the correct order of date values
       const weight = parseInt(formData.weight, 10);
       const gender = parseInt(formData.gender, 10);
 
@@ -80,6 +81,7 @@ export default function RegisterJudokaPage() {
         <label>Date of Birth (YYYY-MM-DD):</label>
         <input
           name="dob"
+          type="date"
           className="input-field"
           value={formData.dob}
           onChange={handleInputChange}
