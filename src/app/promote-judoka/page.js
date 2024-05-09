@@ -14,14 +14,14 @@ export default function PromoteJudokaPage() {
   };
 
   return (
-    <div>
-      <h2>Promote Judoka</h2>
+    <div className="form-container">
+      <h1 className="text-primary">Promote Judoka</h1>
       <form>
         <label>Judoka ID:</label>
-        <input type="number" value={judokaId} onChange={(e) => setJudokaId(e.target.value)} />
+        <input type="number" className="input-field" value={judokaId} onChange={(e) => setJudokaId(e.target.value)} />
 
         <label>New Belt Level:</label>
-        <select value={newBeltLevel} onChange={(e) => setNewBeltLevel(e.target.value)}>
+        <select value={newBeltLevel} className="input-field" onChange={(e) => setNewBeltLevel(e.target.value)}>
           <option value="0">White Belt</option>
           <option value="1">Yellow Belt</option>
           <option value="2">Orange Belt</option>
@@ -31,7 +31,7 @@ export default function PromoteJudokaPage() {
           <option value="6">Black Belt</option>
         </select>
 
-        <button type="button" onClick={handlePromoteJudoka}>Promote</button>
+        <button type="button" className="button-primary" onClick={handlePromoteJudoka}>Promote</button>
       </form>
     </div>
   );
