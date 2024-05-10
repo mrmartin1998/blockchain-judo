@@ -7,12 +7,10 @@ import JudoSystemArtifact from '/build/contracts/JudoSystem.json';
 let web3;
 let judoSystem;
 
-// Contract address and ABI
-const contractAddress = "0xA5B9E2534a261F344890046CAED17A53C8F26690";
+const contractAddress = "0xCbBE01bAB7b807F287B3D7017C9315980E393e7b";
 
 export function initializeWeb3() {
   if (typeof window !== 'undefined') {
-    // Proceed only if we're in a client-side environment
     if (window.ethereum) {
       window.ethereum.request({ method: 'eth_requestAccounts' })
         .then((accounts) => {
@@ -25,7 +23,6 @@ export function initializeWeb3() {
           console.error('User denied account access', error);
         });
     } else if (window.web3) {
-      // Legacy Metamask support
       web3 = new Web3(window.web3.currentProvider);
       judoSystem = new web3.eth.Contract(JudoSystemArtifact.abi, contractAddress);
       web3.eth.getAccounts().then((accounts) => {
@@ -37,7 +34,6 @@ export function initializeWeb3() {
         }
       });
     } else {
-      // Fallback to Ganache
       web3 = new Web3('http://127.0.0.1:7545');
       judoSystem = new web3.eth.Contract(JudoSystemArtifact.abi, contractAddress);
       console.log('No Metamask detected. Falling back to local Ganache network.');
@@ -53,8 +49,6 @@ export function initializeWeb3() {
   }
 }
 
-// Initialize Web3 immediately
 initializeWeb3();
 
-// Export Web3 and the contract instance
 export { web3, judoSystem };

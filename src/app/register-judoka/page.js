@@ -1,4 +1,3 @@
-// src/app/register-judoka/page.js
 "use client";
 import { useState } from "react";
 import '../globals.css';
@@ -9,7 +8,7 @@ export default function RegisterJudokaPage() {
     name: "",
     walletAddress: "",
     dob: "",
-    gender: "0", // "0" for Male, "1" for Female as per your Solidity enum
+    gender: "0",
     weight: "",
     club: "",
   });
@@ -28,7 +27,6 @@ export default function RegisterJudokaPage() {
     const selectedAccount = accounts[0];
 
     try {
-      // Split the date of birth and ensure it's in the correct format
       const [year, month, day] = formData.dob.split("-").map(Number);
 
       if (isNaN(day) || isNaN(month) || isNaN(year) || day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
@@ -36,7 +34,7 @@ export default function RegisterJudokaPage() {
         return;
       }
 
-      const birthDate = [day, month, year]; // Ensure the correct order of date values
+      const birthDate = [day, month, year];
       const weight = parseInt(formData.weight, 10);
       const gender = parseInt(formData.gender, 10);
 

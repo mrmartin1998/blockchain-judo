@@ -153,8 +153,8 @@ contract JudoSystem {
 
 
     function calculateAge(Date memory _birthDate) public view returns (uint256) {
-        uint256 currentYear = block.timestamp / 365 days; // Get current year from timestamp
-        return currentYear > _birthDate.year ? currentYear - _birthDate.year : 0;
+    uint256 currentYear = (block.timestamp / 365 days) + 1970; // Convert from Unix epoch
+    return currentYear > _birthDate.year ? currentYear - _birthDate.year : 0;
     }
 
     // Function to unpack date from uint32 format
@@ -166,7 +166,7 @@ contract JudoSystem {
 
 
 // Correct usage in registerJudoka (and similar adjustment in other relevant functions)
-function registerJudoka(
+    function registerJudoka(
         string memory _name, 
         address _walletAddress, 
         Date memory _birthDate,
@@ -179,8 +179,8 @@ function registerJudoka(
 
         uint256 age = calculateAge(_birthDate);
 
-        AgeCategory ageCategory = getAgeCategory(age);
-        WeightCategory weightCategory = getWeightCategory(_weight);
+        emit DebugInfo(judokaCount + 1, age, _weight, getAgeCategory(age), getWeightCategory(_weight));
+
 
         judokaCount++;
         judokasBasic[judokaCount] = JudokaBasic({
@@ -201,14 +201,14 @@ function registerJudoka(
             age: age,
             weight: _weight,
             club: _club,
-            ageCategory: ageCategory,
-            weightCategory: weightCategory
+            ageCategory: getAgeCategory(age),
+            weightCategory: getWeightCategory(_weight)
         });
 
         judokaIds[_walletAddress] = judokaCount;
 
         emit JudokaRegistered(
-            judokaCount, _name, _walletAddress, BeltLevel.White, _birthDate.year, _gender, '', '', age, _weight, _club, ageCategory, weightCategory, block.timestamp
+            judokaCount, _name, _walletAddress, BeltLevel.White, _birthDate.year, _gender, '', '', age, _weight, _club, getAgeCategory(age), getWeightCategory(_weight), block.timestamp
         );
     }
 

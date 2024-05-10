@@ -4,9 +4,10 @@ import { useState } from "react";
 import '../globals.css';
 import { judoSystem, web3 } from "../utils/web3";
 
-// Map numeric belt levels and genders to their corresponding names
 const beltLevels = ["White", "Yellow", "Orange", "Green", "Blue", "Brown", "Black"];
 const genders = ["Male", "Female"];
+const ageCategories = ["Juveniles", "Cadets", "Juniors", "Seniors", "Veterans"];
+const weightCategories = ["Under 60", "Under 66", "Under 73", "Under 81", "Under 90", "Under 100", "Over 100"];
 
 export default function JudokaProfilePage() {
   const [judokaId, setJudokaId] = useState("");
@@ -28,10 +29,10 @@ export default function JudokaProfilePage() {
     }
 };
 
-
-  // Functions to get belt and gender names
   const getBeltLevelName = (beltLevel) => beltLevels[beltLevel] || "Unknown";
   const getGenderName = (gender) => genders[gender] || "Unknown";
+  const getAgeCategoryName = (ageCategory) => ageCategories[ageCategory] || "Unknown";
+  const getWeightCategoryName = (weightCategory) => weightCategories[weightCategory] || "Unknown";
 
   return (
     <div className="form-container">
@@ -58,10 +59,10 @@ export default function JudokaProfilePage() {
             <p><strong>Email:</strong> {judokaProfile.contact.email || 'N/A'}</p>
             <p><strong>Phone Number:</strong> {judokaProfile.contact.phoneNumber || 'N/A'}</p>
             <p><strong>Club:</strong> {judokaProfile.physical.club}</p>
-            <p><strong>Age:</strong> {judokaProfile.physical.age}</p>
+            <p><strong>Age:</strong> {Number(judokaProfile.physical.age)} years</p>
             <p><strong>Weight:</strong> {Number(judokaProfile.physical.weight)} kg</p>
-            <p><strong>Age Category:</strong> {judokaProfile.physical.ageCategory}</p>
-            <p><strong>Weight Category:</strong> {judokaProfile.physical.weightCategory}</p>
+            <p><strong>Age Category:</strong> {getAgeCategoryName(judokaProfile.physical.ageCategory)}</p>
+            <p><strong>Weight Category:</strong> {getWeightCategoryName(judokaProfile.physical.weightCategory)}</p>
           </div>
         ) : (
           <p>No profile data available.</p>
