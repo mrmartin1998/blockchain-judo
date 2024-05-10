@@ -1,4 +1,3 @@
-// src/app/utils/web3.js
 'use client';
 
 import Web3 from 'web3';
@@ -7,7 +6,7 @@ import JudoSystemArtifact from '/build/contracts/JudoSystem.json';
 let web3;
 let judoSystem;
 
-const contractAddress = "0xCbBE01bAB7b807F287B3D7017C9315980E393e7b";
+const contractAddress = "0xdA1CE0843411e94e795ed71d5e1A1E3E2dB3E54A";
 
 export function initializeWeb3() {
   if (typeof window !== 'undefined') {

@@ -278,6 +278,12 @@ function updateJudokaContactDetails(
         judokaPoints[_id] += _points;
     }
 
+    function getJudokaIdByWallet(address _walletAddress) public view returns (uint256) {
+    uint256 judokaId = judokaIds[_walletAddress];
+    require(judokaId != 0, "Error: Judoka not found for the given wallet address.");
+    return judokaId;
+    }
+
 // Function to create a competition correctly handling the packed date
 function createCompetition(
     string memory _name,
