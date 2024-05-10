@@ -22,17 +22,14 @@ export default function GetBeltLevelPage() {
       const selectedAccount = accounts[0];
       console.log("Selected account:", selectedAccount);
 
-      // Validate wallet address format
       if (!walletAddress || walletAddress.length !== 42 || !walletAddress.startsWith("0x")) {
         alert("Please enter a valid Ethereum wallet address.");
         return;
       }
 
-      // Get Judoka ID from the contract
       const judokaId = await judoSystem.methods.getJudokaIdByWallet(walletAddress).call({ from: selectedAccount });
       console.log("Found Judoka ID:", judokaId);
 
-      // Get the belt level using the Judoka ID
       const beltLevelNumeric = await judoSystem.methods.getBeltLevel(judokaId).call({ from: selectedAccount });
       console.log("Numeric Belt Level:", beltLevelNumeric);
 
@@ -42,8 +39,6 @@ export default function GetBeltLevelPage() {
       alert("Error fetching belt level. Please verify that the wallet address is correct.");
     }
   };
-
-
 
   return (
     <div className="form-container">

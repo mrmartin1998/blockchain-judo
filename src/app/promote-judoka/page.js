@@ -1,4 +1,3 @@
-// src/app/promote-judoka/page.js
 "use client";
 import { useState } from "react";
 import '../globals.css';

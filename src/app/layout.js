@@ -1,11 +1,10 @@
-// src/app/layout.js
 "use client";
 import './globals.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname();
 
   const isActive = (href) => pathname === href ? "active-nav-item" : "";
 
