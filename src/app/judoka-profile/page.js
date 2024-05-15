@@ -1,4 +1,3 @@
-// src/app/judoka-profile/page.js
 "use client";
 import { useState } from "react";
 import '../globals.css';
@@ -21,7 +20,7 @@ export default function JudokaProfilePage() {
 
     try {
         const profile = await judoSystem.methods.getJudokaInfo(judokaId).call();
-        console.log(profile); // Log the entire profile object
+        console.log(profile);
         setJudokaProfile(profile);
     } catch (error) {
         console.error("Error fetching profile:", error);
